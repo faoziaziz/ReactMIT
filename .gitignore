@@ -24,4 +24,4 @@ yarn-error.log*
 
 # kode khusus
 
-.forbid
+*.forbid
