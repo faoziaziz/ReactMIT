@@ -8,23 +8,29 @@ import './App.css';
 
 const list = [
 {
-	title: 'React',
-	url: 'https://facebook.github.io/react/',
-	author: 'Jordan Walke',
+	title: 'CBGL',
+	url: 'https://foziaziz.herokuapp.com',
+	author: 'Aziz Faozi',
 	num_comments: 3,
 	points: 4,
 	objectID: 0,
 },
 {
-	title: 'Redux',
-	url: 'https://github.com/reactjs/redux',
-	author: 'Dan Abramov, Andrew Clark',
+	title: 'facebook',
+	url: 'https://facebook.com/phaoziaziz',
+	author: 'Aziz Amerul Faozi',
 	num_comments: 2,
 	points: 5,
 	objectID: 1,
 },
 ];
 
+function isSearched(searchTerm){
+	return function(item){
+		// some condition which returns true or false
+		return item.title.toLowerCase().includes(searchTerm.toLowerCase());
+	}
+}
 // App class 
 
 class App extends Component {
@@ -33,8 +39,15 @@ class App extends Component {
 		super(props);
 		this.state={
 			list: list,
+			searchTerm:'',
 		};
+		this.onSearchChange=this.onSearchChange.bind(this);
 		this.onDismiss=this.onDismiss.bind(this);
+
+	}
+	onSearchChange(event)
+	{
+		this.setState({searchTerm: event.target.value});
 	}
 
 /*percoban 1
@@ -62,29 +75,35 @@ class App extends Component {
 		this.setState({list: updatedList});
 	}
 	render() {
+		const{searchTerm, list}=this.state;
 		return (
 			<div className="App">
 				<form>
-					<input type="text" />
+					<input 
+					type="text" 
+					value={searchTerm}
+					onChange={this.onSearchChange}
+					/>
 				</form>
-				{ this.state.list.map(item=>
-					<div key={item.objectID}>
-        			<span>
-        				<a href={item.url}>{item.title}</a>
-        			</span>
-        			<span>{item.author}</span>
-        			<span>{item.num_comments}</span>
-        			<span>{item.points}</span>
-					<span>
-					<button
-						onClick={()=>this.onDismiss(item.objectID)}	
-						 
-						type="button">
-						Dismiss
-					</button>
-					</span>
-        			</div>        		
-        	)}
+				{
+					this.state.list.filter(isSearched(this.state.searchTerm)).map(item=>
+							<div key={item.objectID}>
+        					<span>
+        						<a href={item.url}>{item.title}</a>
+        					</span>
+        					<span>{item.author}</span>
+        					<span>{item.num_comments}</span>
+        					<span>{item.points}</span>
+							<span>
+							<button
+								onClick={()=>this.onDismiss(item.objectID)}	
+						 		type="button">
+								Dismiss
+							</button>
+							</span>
+        					</div>       
+						)}
+
       </div>
     );
   }
