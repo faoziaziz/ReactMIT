@@ -24,7 +24,22 @@ const list = [
 	objectID: 1,
 },
 ];
-
+const Search=({value, onChange, children})=>{
+//function Search({value, onChange, children}){
+	//const {value, onChange, children}=props;
+	//return (
+	return(
+		<form>
+			{children}<input 
+			type="text"
+			value={value}
+			onChange={onChange}
+			/>
+		</form>
+	//	);
+	);
+}
+//}
 function isSearched(searchTerm){
 	return function(item){
 		// some condition which returns true or false
@@ -97,6 +112,7 @@ class App extends Component {
   }
 }
 
+/*
 class Search extends Component{
 	//const{value, onChange, children}=this.props;
 	render(){
@@ -112,6 +128,7 @@ class Search extends Component{
 		);
 	}
 }
+*/
 
 class Table extends Component{
 	render(){
@@ -127,17 +144,36 @@ class Table extends Component{
 						<span>{item.num_comments}</span>
 						<span>{item.points}</span>
 						<span>
-							<button 
-							onClick={()=>onDismiss(item.objectID)}
-							type="button"
-							>
+							<Button onClick={()=>onDismiss(item.objectID)}>
 							Dismiss
-							</button>
+							</Button>
 						</span>
 					</div>
 					)}
 			</div>
 		);
 	}
+}
+
+class Button  extends Component {
+	render() {
+		const {
+			onClick,
+			className='',
+			children,
+		}=this.props;
+
+		return(
+		<button 
+			onClick={onClick}
+			className={className}
+			type="button"
+		>
+		{children}
+		</button>
+		);
+	}
+
+
 }
 export default App;
