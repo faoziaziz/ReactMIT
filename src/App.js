@@ -64,11 +64,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-			{ this.state.list.map(item=>{
-				const onHandleDismiss = ()=>
-				this.onDismiss(item.objectID);
-				
-				return(
+			{ this.state.list.map(item=>
 					<div key={item.objectID}>
         			<span>
         				<a href={item.url}>{item.title}</a>
@@ -78,16 +74,13 @@ class App extends Component {
         			<span>{item.points}</span>
 					<span>
 					<button
-						onClick={onHandleDismiss}
+						onClick={()=>this.onDismiss(item.objectID)}	
 						 
 						type="button">
 						Dismiss
 					</button>
 					</span>
-        			</div>
-					);
-			}
-        		
+        			</div>        		
         	)}
       </div>
     );
