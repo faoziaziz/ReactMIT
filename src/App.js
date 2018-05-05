@@ -39,6 +39,34 @@ const Search=({value, onChange, children})=>{
 	//	);
 	);
 }
+const Table=({list, pattern, onDismiss})=>
+<div className="table">
+	{list.filter(isSearched(pattern)).map(item=>
+		<div key={item.objectID} className="table-row">
+			<span style={{width: '40%'}}>
+				<a href={item.url}>{item.title}</a>
+			</span>
+			<span style={{width: '30%'}}>
+				{item.author}
+			</span>
+			<span style={{width: '10%'}}>
+				{item.num_comments}
+			</span>
+			<span style={{width: '10%'}}>
+				{item.points}
+			</span>
+			<span style={{width: '10%'}}>
+				<Button 
+					onClick={()=> onDismiss(item.objectID)}
+					className="button-inline"
+				>
+				Dismiss
+				</Button>
+			</span>
+
+		</div>
+		)}
+</div>
 //}
 function isSearched(searchTerm){
 	return function(item){
@@ -65,49 +93,32 @@ class App extends Component {
 		this.setState({searchTerm: event.target.value});
 	}
 
-/*percoban 1
-
-	onDismiss(id){
-		function isNotId(item){
-		return item.objectID !==id;
-		}
-		const updatedList =this.state.list.filter(isNotId);
-	}
-	*/
-	/*
-	onDismiss(id){
-		const isNotId=item=>item.objectID!==id;
-		const updatedList= this.staete.list.filter(isNotId);
-	}
-	*/
-	/*
-	onDismiss(id){
-		const updatedList=this.state.list.filter(item=>item.objectID!==id);
-	}*/
 	onDismiss(id){
 		const isNotId=item=> item.objectID!==id;
 		const updatedList=this.state.list.filter(isNotId);
 		this.setState({list: updatedList});
 	}
+
 	render() {
 		const{searchTerm, list}=this.state;
 		return (
-			<div className="App">
+			<div className="page">
+				<div className="interactions">
 				<Search 
 					value={searchTerm}
-					onChange={this.onSearchChange}>
+					onChange={this.onSearchChange}
+				>
 					Search
 				</Search>
+				</div>
+
 				<Table 
 					list={list}
 					pattern={searchTerm}
 					onDismiss={this.onDismiss}
 				/>
+			</div>
 
-				
-				
-
-      </div>
     );
   }
 }
@@ -129,7 +140,7 @@ class Search extends Component{
 	}
 }
 */
-
+/*
 class Table extends Component{
 	render(){
 		const{list, pattern, onDismiss}=this.props;
@@ -154,7 +165,7 @@ class Table extends Component{
 		);
 	}
 }
-
+*/
 class Button  extends Component {
 	render() {
 		const {
