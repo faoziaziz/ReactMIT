@@ -10,7 +10,7 @@ const list = [
 {
 	title: 'CBGL',
 	url: 'https://foziaziz.herokuapp.com',
-	author: 'Aziz Faozi',
+	author: 'Aziz Amerul Faozi',
 	num_comments: 3,
 	points: 4,
 	objectID: 0,
@@ -25,9 +25,6 @@ const list = [
 },
 ];
 const Search=({value, onChange, children})=>{
-//function Search({value, onChange, children}){
-	//const {value, onChange, children}=props;
-	//return (
 	return(
 		<form>
 			{children}<input 
@@ -123,49 +120,6 @@ class App extends Component {
   }
 }
 
-/*
-class Search extends Component{
-	//const{value, onChange, children}=this.props;
-	render(){
-		const{value, onChange, children}=this.props;
-		return (
-			<form>
-			{children}<input 
-					type="text"
-					value={value}
-					onChange={onChange}
-				/>
-			</form>
-		);
-	}
-}
-*/
-/*
-class Table extends Component{
-	render(){
-		const{list, pattern, onDismiss}=this.props;
-		return(
-			<div>
-				{list.filter(isSearched(pattern)).map(item=>
-					<div key={item.objectID}>
-						<span>
-							<a href={item.url}>{item.title}</a>
-						</span>
-						<span>{item.author}</span>
-						<span>{item.num_comments}</span>
-						<span>{item.points}</span>
-						<span>
-							<Button onClick={()=>onDismiss(item.objectID)}>
-							Dismiss
-							</Button>
-						</span>
-					</div>
-					)}
-			</div>
-		);
-	}
-}
-*/
 class Button  extends Component {
 	render() {
 		const {
